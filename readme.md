@@ -32,8 +32,6 @@ https://flask-socketio.readthedocs.io/en/latest/index.html
 
 ### Resultado Final
 
-![](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/master/portada_flask-socketio__chat_urian_viera.PNG)
-
-![](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/master/portada_flask_socketio_urian_viera.PNG)
+![](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/master/implementando-flask-socketIO-Urian-viera.PNG)
 
 # Por favor no olvides dejar tu comentario y like en el canal 👍 ah suscríbete 😀
