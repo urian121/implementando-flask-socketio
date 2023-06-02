@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Implementando Flask SocketIO</title>
+  </head>
+  <body>
+    <h2>Implementando Flask SocketIO</h2>
+
+    <h1>Flask-SocketIO Example</h1>
+    <ul id="messages"></ul>
+    <form id="formFlaskSocketIO">
+      <input type="text" id="message" autocomplete="off" />
+      <button>Send</button>
+    </form>
+
+    <!-- Link to the socket.io info -->
+    <script
+      src="https://cdn.socket.io/4.5.4/socket.io.min.js"
+      integrity="sha384-/KNQL8Nu5gCHLqwqfQjA689Hhoqgi2S84SNUxC3roTe4EhJ9AfLkp8QiQcU8AMzI"
+      crossorigin="anonymous"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const socket = io();
+
+        //Escuchando connect
+        socket.on("connect", function () {
+          console.log("Socket Activo.!");
+        });
+
+        //Escuchando disconnect
+        socket.on("disconnect", function () {
+          console.log("Socket Desconectado.!");
+        });
+
+        document
+          .querySelector("#formFlaskSocketIO")
+          .addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            let message = document.querySelector("#message").value;
+
+            // Emitiendo por message
+            socket.emit("message", message);
+            document.querySelector("#message").value = "";
+          });
+
+        // Escuchando por message
+        socket.on("message", (message) => {
+          var li = document.createElement("li");
+          li.textContent = message;
+          document.querySelector("#messages").appendChild(li);
+        });
+      });
+    </script>
+  </body>
+</html>
