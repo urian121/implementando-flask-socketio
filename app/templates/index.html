@@ -5,18 +5,88 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Implementando Flask SocketIO</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        background-color: aliceblue;
+      }
+      .content {
+        width: 100%;
+        margin: 0 auto;
+        text-align: center;
+
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+      }
+
+      h1 {
+        margin-top: 10px;
+        text-align: center;
+        margin-bottom: 50px;
+      }
+      input {
+        outline: none;
+        padding: 7px;
+      }
+      button {
+        border: none;
+        padding: 10px 20px;
+      }
+      ul {
+        width: 90%;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        margin: 0 auto;
+        padding: 15px 10px;
+        background-color: #fff;
+        box-shadow: 0 2px 15px -3px rgba(0, 0, 0, 0.07),
+          0 10px 20px -2px rgba(0, 0, 0, 0.04) !important;
+        border-radius: 0.5rem !important;
+      }
+
+      li {
+        line-height: 1.5;
+        text-indent: -30px;
+        padding: 8px 0 8px 30px;
+        text-align: left;
+        border-bottom: 1px solid #eee;
+      }
+      .flex-item {
+        width: 50%;
+      }
+    </style>
   </head>
   <body>
-    <h2>Implementando Flask SocketIO</h2>
+    <h1>
+      Implementando Flask SocketIO
+      <hr />
+    </h1>
 
-    <h1>Flask-SocketIO Example</h1>
-    <ul id="messages"></ul>
-    <form id="formFlaskSocketIO">
-      <input type="text" id="message" autocomplete="off" />
-      <button>Send</button>
-    </form>
+    <!---->
+    <div class="content">
+      <!--Formulario para enviar mensajes-->
+      <div class="flex-item">
+        <form id="formFlaskSocketIO">
+          <input type="text" id="message" autocomplete="off" />
+          <button>Enviar</button>
+        </form>
+      </div>
 
-    <!-- Link to the socket.io info -->
+      <!--Para pintar los mensajes-->
+      <div class="flex-item">
+        <ul id="list_messages"></ul>
+      </div>
+    </div>
+
+    <!-- Link para socket.io -->
     <script
       src="https://cdn.socket.io/4.5.4/socket.io.min.js"
       integrity="sha384-/KNQL8Nu5gCHLqwqfQjA689Hhoqgi2S84SNUxC3roTe4EhJ9AfLkp8QiQcU8AMzI"
@@ -41,18 +111,19 @@
           .addEventListener("submit", (event) => {
             event.preventDefault();
 
-            let message = document.querySelector("#message").value;
+            const message_chat = document.querySelector("#message").value;
 
             // Emitiendo por message
-            socket.emit("message", message);
+            socket.emit("message", message_chat);
             document.querySelector("#message").value = "";
           });
 
         // Escuchando por message
         socket.on("message", (message) => {
+          console.log(message);
           var li = document.createElement("li");
           li.textContent = message;
-          document.querySelector("#messages").appendChild(li);
+          document.querySelector("#list_messages").appendChild(li);
         });
       });
     </script>

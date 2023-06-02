@@ -27,17 +27,17 @@ def handle_disconnect():
 
 # escuchando por message
 @socketio.on('message')
-def recibirMsj(message):
-    print('Recibiendo mensaje: ' + message)
+def recibirMsj(message_chat):
+    print('Recibiendo mensaje: ' + message_chat)
     ''' 
     broadcast=True se utiliza al emitir un evento desde el servidor para especificar 
     que dicho evento debe ser transmitido a todos los clientes conectados, 
     excepto al cliente que generó el evento.
     '''
-    emit('message', message, broadcast=True)
-    # emit('my response', {'data': message})
+    emit('message', message_chat, broadcast=True)
     # emit('my response', {'data': message}, broadcast=True)
 
 
+# Arrancando mi aplicacion flask y arrancando socketio tambien
 if __name__ == '__main__':
     socketio.run(app, debug=True, port=5200)
